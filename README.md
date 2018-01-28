@@ -1,2 +1,2 @@
 # DynamicMiner
-Dynamic mining base on profitability
+Dynamic mining based on profitability
