@@ -13,10 +13,6 @@ from coinManager import coinManager
 
 logging.basicConfig()
 
-def copyLog(skipTime=False):
-    if ((datetime.datetime.now().hour == 23) and (datetime.datetime.now().minute >= 55)) or skipTime:
-        subprocess.call('scp /Users/davides/miners/miner/workfile osmc@192.168.0.156:/home/osmc', shell=True)
-
 class Miner(object):
     def __init__(self, setCoin=''):
         self.__command = 'none'
@@ -70,5 +66,4 @@ try:
 except KeyboardInterrupt:
     miner.getManager().printTime()  
     miner.getManager().end()
-    copyLog(skipTime=True)
     sys.exit(0)
