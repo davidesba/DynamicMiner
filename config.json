@@ -1,0 +1,12 @@
+{
+    "commands" : {
+        "eth" : "command and path to execute miner"
+    },
+    "active_coins" : ["eth"],
+    "coin_translate" : {
+        "eth" : "Ethereum"
+    },
+    "coin_priority" : {
+        "eth" : 0
+    }
+}
