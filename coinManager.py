@@ -3,7 +3,6 @@ import json
 import requests
 import datetime
 import time
-import balance
 import operator
 import stats
 
@@ -65,10 +64,8 @@ class coinManager(object):
         self.__f_out.write('[' + str(time.time()).split('.')[0] + "] Program Start\n")
         self.updateConfig()
         self.updateDiff()
-        self.printBalance()
     
     def end(self):
-        self.printBalance()
         self.__f_out.write(self.__statsMng.getReport(True))
         self.__f_out.write('[' + str(time.time()).split('.')[0] + "] Program Stop\n")
         self.__f_out.close()
@@ -124,12 +121,6 @@ class coinManager(object):
         else:
             self.__coins[self.__selected].incTime()
 
-        #print Coin balances every 30 minutes
-        if self.__statInterval > 20:
-            self.printBalance()
-            self.__f_out.write(self.__statsMng.getReport())
-            self.__statInterval = 1
-
         if (coinMax != self.__selected) and ((self.__coins[coinMax].getRevenue() - self.__coins[self.__selected].getRevenue()) > 1.0):
             print '[' + str(datetime.datetime.now()).split('.')[0] + "] Mining " + coinMax.upper()
             self.__f_out.write('[' + str(time.time()).split('.')[0] + "] Mining " + coinMax.upper() + '\n')
@@ -153,6 +144,3 @@ class coinManager(object):
         with open('config.json') as json_data:
             config = json.load(json_data)
         return config['commands'][coin]
-
-    def printBalance(self):
-        self.__f_out.write(balance.printBalance())
